@@ -1,7 +1,7 @@
 import * as React from "react";
-import { DefaultProps, Store } from "../store";
+import { DefaultProps } from "../store";
 import { completedTodoCount } from "../lib/todos";
-import * as Utilities from "../utilities";
+import { onClearCompleted } from "../actions";
 
 export class ClearButton extends React.Component<DefaultProps> {
   public render() {
@@ -17,13 +17,4 @@ export class ClearButton extends React.Component<DefaultProps> {
       return null;
     }
   }
-}
-
-export function onClearCompleted(store: Store) {
-  const _model = store.model();
-  const _todos = _model.todos.filter(_todo => {
-    return !_todo.completed;
-  });
-
-  store.replaceModel(Utilities.safeMerge(_model, { todos: _todos }));
 }

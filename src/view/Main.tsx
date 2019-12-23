@@ -1,9 +1,8 @@
 import * as React from "react";
-import { DefaultProps, Store } from "../store";
-import { safeMerge } from "../utilities";
+import { DefaultProps } from "../store";
 import { activeTodoCount, shownTodos } from "../lib/todos";
 import { TodoItem } from "./TodoItem";
-import { Todo } from "../model";
+import { completeAll } from "../actions";
 
 export class Main extends React.Component<DefaultProps> {
   public render() {
@@ -34,16 +33,4 @@ export class Main extends React.Component<DefaultProps> {
       </section>
     );
   }
-}
-
-function completeAll(store: Store) {
-  const _model = store.model();
-
-  store.replaceModel(
-    safeMerge(_model, {
-      todos: _model.todos.map((_todo: Todo) =>
-        safeMerge(_todo, { completed: true })
-      )
-    })
-  );
 }

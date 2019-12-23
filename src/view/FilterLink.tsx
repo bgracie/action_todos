@@ -2,6 +2,7 @@ import * as React from "react";
 import { Model } from "../model";
 import { Actor, Store } from "../store";
 import classNames from "classnames";
+import { onFilterClick } from "../actions";
 
 interface FilterLinkProps {
   model: Model;
@@ -28,9 +29,4 @@ export class FilterLink extends React.Component<FilterLinkProps> {
       </li>
     );
   }
-}
-
-export function onFilterClick(store: Store, newRoute: string) {
-  store.changeRoute(newRoute);
-  store.refresh();
 }

@@ -7,6 +7,7 @@ import * as LibLocalStorage from "./lib/localstorage";
 import "./index.css";
 import { getCached } from "./lib/cached_model";
 import { initialModel } from "./lib/initial_model";
+import { onPopState } from "./actions";
 
 const store = new Store("Todos", initialModel(), window.history, getCached);
 
@@ -16,10 +17,6 @@ store.subscribe(model => {
     JSON.stringify({ todos: model.todos })
   );
 });
-
-function onPopState(_store: Store) {
-  _store.refresh();
-}
 
 window.onpopstate = store.actor(onPopState);
 
