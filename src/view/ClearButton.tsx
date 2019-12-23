@@ -5,11 +5,14 @@ import { onClearCompleted } from "../actions";
 
 export class ClearButton extends React.Component<DefaultProps> {
   public render() {
-    const { model, actor } = this.props;
+    const { model, bindAction } = this.props;
 
     if (completedTodoCount(model) > 0) {
       return (
-        <button className="clear-completed" onClick={actor(onClearCompleted)}>
+        <button
+          className="clear-completed"
+          onClick={bindAction(onClearCompleted)}
+        >
           Clear completed
         </button>
       );

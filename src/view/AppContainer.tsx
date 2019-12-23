@@ -14,8 +14,8 @@ export class AppContainer extends React.Component<AppContainerProps> {
   }
   public render() {
     const model = this.props.store.model();
-    const actor = this.props.store.actor;
+    const bindAction = this.props.store.bindAction;
 
-    return <App model={model} actor={actor} />;
+    return <App model={model} bindAction={bindAction} />;
   }
 }

@@ -106,12 +106,12 @@ export function onNewTodoChange(store: Store, event: React.KeyboardEvent) {
 }
 
 export function onPopState(_store: Store) {
-  _store.refresh();
+  _store.replaceModel();
 }
 
 export function onFilterClick(store: Store, newRoute: string) {
   store.changeRoute(newRoute);
-  store.refresh();
+  store.replaceModel();
 }
 
 export function onClearCompleted(store: Store) {

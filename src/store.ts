@@ -2,15 +2,15 @@ import * as Logger from "./logger";
 import { Model, Cached } from "./model";
 import { safeMerge } from "./utilities";
 
-export type ConcreteAction = (...args: any[]) => any;
-export type AbstractAction = (store: Store, ...rest: any[]) => any;
+export type BoundAction = (...args: any[]) => any;
+export type UnboundAction = (store: Store, ...rest: any[]) => any;
 export type Subscription = (model: Model) => any;
 
-export type Actor = typeof Store.prototype.actor;
+export type BindAction = typeof Store.prototype.bindAction;
 
 export interface DefaultProps {
   model: Model;
-  actor: Actor;
+  bindAction: BindAction;
 }
 
 export type GetCached = () => Cached;
@@ -34,7 +34,7 @@ export class Store {
     this._getCached = getCached;
     this._subscriptions = [];
     this._modelVersion = 0;
-    this.actor = this.actor.bind(this);
+    this.bindAction = this.bindAction.bind(this);
 
     Logger.log(
       `%cCreating store ${name} with model version ${this._modelVersion}:`,
@@ -62,20 +62,17 @@ export class Store {
     Logger.log(this.model());
     this.notifySubscribers();
   }
-  public refresh() {
-    this.replaceModel();
-  }
-  public actor(
-    abstractAction: AbstractAction,
+  public bindAction(
+    unboundAction: UnboundAction,
     ...actionDetails: any[]
-  ): ConcreteAction {
+  ): BoundAction {
     return (...args: any[]) => {
       Logger.log(
-        `%cActing with ${abstractAction.name}, ${actionDetails}`,
+        `%cActing with ${unboundAction.name}, ${actionDetails}`,
         "font-weight: bold"
       );
 
-      abstractAction(this, ...actionDetails, ...args);
+      unboundAction(this, ...actionDetails, ...args);
     };
   }
   public subscribe(subscription: Subscription) {

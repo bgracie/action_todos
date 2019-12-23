@@ -1,19 +1,19 @@
 import * as React from "react";
 import { Model } from "../model";
-import { Actor, Store } from "../store";
+import { BindAction, Store } from "../store";
 import classNames from "classnames";
 import { onFilterClick } from "../actions";
 
 interface FilterLinkProps {
   model: Model;
-  actor: Actor;
+  bindAction: BindAction;
   label: string;
   path: string;
 }
 
 export class FilterLink extends React.Component<FilterLinkProps> {
   public render() {
-    const { model, actor, label, path } = this.props;
+    const { model, bindAction, label, path } = this.props;
 
     return (
       <li>
@@ -22,7 +22,7 @@ export class FilterLink extends React.Component<FilterLinkProps> {
           className={classNames({
             selected: model.cached.pathname === path
           })}
-          onClick={actor(onFilterClick, path)}
+          onClick={bindAction(onFilterClick, path)}
         >
           {label}
         </a>

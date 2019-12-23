@@ -10,7 +10,7 @@ import { render } from "@testing-library/react";
 test("renders learn react link", () => {
   const store = new Store("Todos", initialModel(), window.history, getCached);
   const { getByText } = render(
-    <App model={initialModel()} actor={store.actor} />
+    <App model={initialModel()} bindAction={store.bindAction} />
   );
   const title = getByText(/todos/i);
   expect(title).toBeInTheDocument();

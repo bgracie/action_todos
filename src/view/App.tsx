@@ -7,15 +7,15 @@ import { TodoTextInput } from "./TodoTextInput";
 export class App extends React.Component<DefaultProps> {
   public render() {
     const model = this.props.model;
-    const actor = this.props.actor;
+    const bindAction = this.props.bindAction;
 
     return (
       <div>
         <header className="header">
           <h1>todos</h1>
-          <TodoTextInput model={model} actor={actor} />
-          <Main model={model} actor={actor} />
-          <Footer model={model} actor={actor} />
+          <TodoTextInput model={model} bindAction={bindAction} />
+          <Main model={model} bindAction={bindAction} />
+          <Footer model={model} bindAction={bindAction} />
         </header>
       </div>
     );

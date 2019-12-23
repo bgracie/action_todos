@@ -15,6 +15,8 @@ export interface Model {
   todos: Todo[];
 }
 
+// The portion of the model for which an external object is the canonical
+// source of truth
 export interface Cached {
   pathname: string;
 }

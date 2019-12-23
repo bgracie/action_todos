@@ -1,6 +1,6 @@
-# Actor Todos
+# Action Todos
 
-Actor Todos is a reference implementation for a React/Typescript app with a custom state management solution.
+Action Todos is a reference implementation for a React/Typescript app with a simple custom state management solution.
 
 The design spec is taken from TodoMVC, with the exception of routing. Here we use HTML5 history instead of the url hash.
 
@@ -12,6 +12,9 @@ This app is meant to explore an alternative to state management with Redux which
 - handles side effects directly within Actions rather than in Middleware
 
 You can see the state management framework [here](src/store.ts).
+
+- To trigger an state change, call a `BoundAction`.
+- Each action must call `store.replaceModel()`.
 
 ## Available Scripts
 

@@ -18,7 +18,7 @@ store.subscribe(model => {
   );
 });
 
-window.onpopstate = store.actor(onPopState);
+window.onpopstate = store.bindAction(onPopState);
 
 ReactDOM.render(
   <AppContainer store={store} />,

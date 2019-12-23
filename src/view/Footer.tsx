@@ -7,7 +7,7 @@ import { ClearButton } from "./ClearButton";
 
 export class Footer extends React.Component<DefaultProps> {
   public render() {
-    const { model, actor } = this.props;
+    const { model, bindAction } = this.props;
 
     const _activeCount = activeTodoCount(model);
     const activeTodoWord = Utilities.pluralize(_activeCount, "item");
@@ -21,27 +21,27 @@ export class Footer extends React.Component<DefaultProps> {
           <ul className="filters">
             <FilterLink
               model={model}
-              actor={actor}
+              bindAction={bindAction}
               label="All"
               path="/"
               key="/"
             />{" "}
             <FilterLink
               model={model}
-              actor={actor}
+              bindAction={bindAction}
               label="Active"
               path="/active"
               key="/active"
             />{" "}
             <FilterLink
               model={model}
-              actor={actor}
+              bindAction={bindAction}
               label="Completed"
               path="/completed"
               key="/completed"
             />
           </ul>
-          <ClearButton model={model} actor={actor} />
+          <ClearButton model={model} bindAction={bindAction} />
         </footer>
       );
     } else {

@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Model, Todo } from "../model";
-import { Actor } from "../store";
+import { BindAction } from "../store";
 import classNames from "classnames";
 import * as Actions from "../actions";
 
 interface TodoItemProps {
   model: Model;
-  actor: Actor;
+  bindAction: BindAction;
   todo: Todo;
 }
 
@@ -21,7 +21,7 @@ export class TodoItem extends React.Component<TodoItemProps> {
     }
   }
   public render() {
-    const { model, actor, todo } = this.props;
+    const { model, bindAction, todo } = this.props;
 
     const isEditing = this.isEditing(this.props);
 
@@ -37,14 +37,14 @@ export class TodoItem extends React.Component<TodoItemProps> {
             className="toggle"
             type="checkbox"
             checked={todo.completed}
-            onChange={actor(Actions.completeOne, todo.id)}
+            onChange={bindAction(Actions.completeOne, todo.id)}
           />
-          <label onDoubleClick={actor(Actions.editTodo, todo.id)}>
+          <label onDoubleClick={bindAction(Actions.editTodo, todo.id)}>
             {todo.label}
           </label>
           <button
             className="destroy"
-            onClick={actor(Actions.destroyTodo, todo.id)}
+            onClick={bindAction(Actions.destroyTodo, todo.id)}
           />
         </div>
         <input
@@ -53,9 +53,9 @@ export class TodoItem extends React.Component<TodoItemProps> {
             this.inputElem = element as HTMLInputElement;
           }}
           value={model.editingTodoLabel}
-          onBlur={actor(Actions.onTodoBlur)}
-          onChange={actor(Actions.onTodoChange)}
-          onKeyDown={actor(Actions.onTodoKeyDown)}
+          onBlur={bindAction(Actions.onTodoBlur)}
+          onChange={bindAction(Actions.onTodoChange)}
+          onKeyDown={bindAction(Actions.onTodoKeyDown)}
         />
       </li>
     );

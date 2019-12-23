@@ -6,7 +6,7 @@ import { completeAll } from "../actions";
 
 export class Main extends React.Component<DefaultProps> {
   public render() {
-    const { model, actor } = this.props;
+    const { model, bindAction } = this.props;
 
     return (
       <section className="main">
@@ -14,7 +14,7 @@ export class Main extends React.Component<DefaultProps> {
           id="toggle-all"
           className="toggle-all"
           type="checkbox"
-          onChange={actor(completeAll)}
+          onChange={bindAction(completeAll)}
           checked={activeTodoCount(model) === 0}
         />
         <label htmlFor="toggle-all" />
@@ -24,7 +24,7 @@ export class Main extends React.Component<DefaultProps> {
               <TodoItem
                 model={model}
                 todo={_todo}
-                actor={actor}
+                bindAction={bindAction}
                 key={_todo.id}
               />
             );
