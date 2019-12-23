@@ -53,6 +53,6 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-### App Shell
+## App Shell
 
 The app was bootstrapped with `create-react-app`, and is managed by the `react-scripts` package. Further documentation for `create-react_app` is available [here](https://facebook.github.io/create-react-app/docs/getting-started).
