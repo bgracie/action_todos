@@ -16,6 +16,11 @@ You can see the state management framework [here](src/store.ts).
 - To trigger a state change, call a `BoundAction`.
 - Each action must call `store.replaceModel()`.
 
+## Files & Directory Structure
+
+- `lib` contains the app model definition and non-mutative business logic
+- `actions` contains the functions that mutate the model
+
 ## Available Scripts
 
 In the project directory, you can run:

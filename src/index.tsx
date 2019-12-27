@@ -1,10 +1,10 @@
-import * as serviceWorker from "./serviceWorker";
+import * as serviceWorker from "./framework/service_worker";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { AppContainer } from "./view/AppContainer";
-import { Store } from "./store";
+import { Store } from "./framework/store";
 import * as LibLocalStorage from "./lib/localstorage";
-import "./index.css";
+import "./view/index.css";
 import { getCached } from "./lib/cached_model";
 import { initialModel } from "./lib/initial_model";
 import { onPopState } from "./actions";

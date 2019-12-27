@@ -1,6 +1,6 @@
 import * as Logger from "./logger";
-import { Model, Cached } from "./model";
-import { safeMerge } from "./utilities";
+import { Model, Cached } from "../lib/model";
+import { safeMerge } from "../utilities";
 
 export type BoundAction = (...args: any[]) => any;
 export type UnboundAction = (store: Store, ...rest: any[]) => any;

@@ -1,10 +1,10 @@
-import { Store } from "./store";
-import { TodoId } from "./model";
+import { Store } from "./framework/store";
+import { TodoId } from "./lib/model";
 import { safeMerge } from "./utilities";
 import { findTodoIndex, findTodo, newTodo } from "./lib/todos";
 import * as Keyboard from "./lib/keyboard";
 import * as Utilities from "./utilities";
-import { Todo } from "./model";
+import { Todo } from "./lib/model";
 
 export function submitTodo(store: Store) {
   const _model = store.model();

@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Model } from "../model";
-import { BindAction, Store } from "../store";
+import { Model } from "../lib/model";
+import { BindAction } from "../framework/store";
 import classNames from "classnames";
 import { onFilterClick } from "../actions";
 

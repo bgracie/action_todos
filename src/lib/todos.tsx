@@ -1,4 +1,4 @@
-import { Model, TodoId, Todo, TodoLabel, TodoIndex } from "../model";
+import { Model, TodoId, Todo, TodoLabel, TodoIndex } from "./model";
 import { uuid } from "../utilities";
 import * as Paths from "./paths";
 
