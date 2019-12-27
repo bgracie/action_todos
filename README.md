@@ -13,7 +13,7 @@ This app is meant to explore an alternative to state management with Redux which
 
 You can see the state management framework [here](src/store.ts).
 
-- To trigger an state change, call a `BoundAction`.
+- To trigger a state change, call a `BoundAction`.
 - Each action must call `store.replaceModel()`.
 
 ## Available Scripts
