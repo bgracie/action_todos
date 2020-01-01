@@ -1,6 +1,6 @@
 import { Model, TodoId, Todo, TodoLabel, TodoIndex } from "./model";
 import { uuid } from "../utilities";
-import * as Paths from "./paths";
+import * as Paths from "./url_paths";
 
 export const findTodo = (model: Model, todoId: TodoId): Todo => {
   return model.todos.find(_todo => {
@@ -24,11 +24,11 @@ export const completedTodoCount = (model: Model) => {
 
 export const shownTodos = (model: Model): Todo[] => {
   return model.todos.filter(_todo => {
-    if (model.cached.pathname === Paths.PathAll) {
+    if (model.cached.pathname === Paths.AllTodos) {
       return true;
-    } else if (model.cached.pathname === Paths.PathActive) {
+    } else if (model.cached.pathname === Paths.ActiveTodos) {
       return !_todo.completed;
-    } else if (model.cached.pathname === Paths.PathCompleted) {
+    } else if (model.cached.pathname === Paths.CompletedTodos) {
       return _todo.completed;
     } else {
       throw new Error("Filter options should be exhaustive.");
