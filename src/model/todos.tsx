@@ -24,11 +24,11 @@ export const completedTodoCount = (model: Model) => {
 
 export const shownTodos = (model: Model): Todo[] => {
   return model.todos.filter(_todo => {
-    if (model.cached.pathname === Paths.AllTodos) {
+    if (model.pathname === Paths.AllTodos) {
       return true;
-    } else if (model.cached.pathname === Paths.ActiveTodos) {
+    } else if (model.pathname === Paths.ActiveTodos) {
       return !_todo.completed;
-    } else if (model.cached.pathname === Paths.CompletedTodos) {
+    } else if (model.pathname === Paths.CompletedTodos) {
       return _todo.completed;
     } else {
       throw new Error("Filter options should be exhaustive.");

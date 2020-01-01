@@ -1,6 +1,7 @@
 export type TodoId = string;
 export type TodoIndex = number;
 export type TodoLabel = string;
+export type Pathname = string;
 export interface Todo {
   id: TodoId;
   label: TodoLabel;
@@ -8,15 +9,9 @@ export interface Todo {
 }
 
 export interface Model {
-  cached: Cached;
+  pathname: Pathname;
   editingTodoId: TodoId | null;
   newTodoLabel: TodoLabel;
   editingTodoLabel: TodoLabel;
   todos: Todo[];
-}
-
-// The portion of the model for which an external object is the canonical
-// source of truth
-export interface Cached {
-  pathname: string;
 }

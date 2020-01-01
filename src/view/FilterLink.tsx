@@ -20,7 +20,7 @@ export class FilterLink extends React.Component<FilterLinkProps> {
         <a
           href="javascript:void(0)"
           className={classNames({
-            selected: model.cached.pathname === path
+            selected: model.pathname === path
           })}
           onClick={bindAction(onFilterClick, path)}
         >

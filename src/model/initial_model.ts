@@ -1,12 +1,17 @@
 import * as LocalStorage from "../interface/localstorage";
-import { getCached } from "./cached_model";
+import * as Model from "./model";
+import * as NoncanonicalModelProperties from "./noncanonical_model_properties";
 
-export const initialModel = () => {
-  return {
+export const get = (): Model.Model => {
+  const canonicalModelProperties = {
     editingTodoId: null,
     newTodoLabel: "",
     editingTodoLabel: "",
-    todos: LocalStorage.getStoredState().todos,
-    cached: getCached()
+    todos: LocalStorage.getStoredState().todos
   };
+
+  return Object.assign(
+    canonicalModelProperties,
+    NoncanonicalModelProperties.get()
+  );
 };

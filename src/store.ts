@@ -1,5 +1,6 @@
 import * as Logger from "./interface/logging";
-import { Model, Cached } from "./model/model";
+import { Model } from "./model/model";
+import * as NoncanonicalModelProperties from "./model/noncanonical_model_properties";
 import { safeMerge } from "./util/object";
 
 export type BoundAction = (...args: any[]) => any;
@@ -13,28 +14,25 @@ export interface DefaultProps {
   bindAction: BindAction;
 }
 
-export type GetCached = () => Cached;
-
 export class Store {
   private _model: Model;
   private _name: string;
   private _history: typeof window.history;
   private _subscriptions: Subscription[];
   private _modelVersion: number;
-  private _getCached: GetCached;
+  private _getNoncanonicalModelProperties: typeof NoncanonicalModelProperties.get;
   constructor(
     name: string,
     initialModel: Model,
-    history: typeof window.history,
-    getCached: GetCached
+    history: typeof window.history
   ) {
     this._history = history;
     this._model = initialModel;
     this._name = name;
-    this._getCached = getCached;
     this._subscriptions = [];
     this._modelVersion = 0;
     this.bindAction = this.bindAction.bind(this);
+    this._getNoncanonicalModelProperties = NoncanonicalModelProperties.get;
 
     Logger.log(
       `%cCreating store ${name} with model version ${this._modelVersion}:`,
@@ -50,9 +48,15 @@ export class Store {
   }
   public replaceModel(newModel?: Model) {
     if (newModel) {
-      this._model = safeMerge(newModel, { cached: this._getCached() });
+      this._model = Object.assign(
+        newModel,
+        this._getNoncanonicalModelProperties()
+      );
     } else {
-      this._model = safeMerge(this.model(), { cached: this._getCached() });
+      this._model = safeMerge(
+        this.model(),
+        this._getNoncanonicalModelProperties()
+      );
     }
     this._modelVersion++;
     Logger.log(
