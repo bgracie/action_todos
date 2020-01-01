@@ -20,8 +20,9 @@ You can see the state management framework [here](src/framework/store.ts).
 
 - `model` contains the model definition and pure functions that operate on the model
 - `actions` contains functions that mutate the model
-- `interface` contains functions wrapping browser API's
-- `framework` contains functions related to the state management framework
+- `interface` contains modules related to browser I/O
+- `framework` defines the state management framework
+- `util` contains utility functions that are not specific to this app
 
 ## Available Scripts
 
