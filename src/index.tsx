@@ -2,10 +2,10 @@ import * as serviceWorker from "./interface/service_worker";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { AppContainer } from "./view/AppContainer";
-import { Store } from "./store";
+import { Store } from "./framework/store";
 import * as LocalStorage from "./interface/localstorage";
 import "./view/index.css";
-import * as InitialModel from "./model/initial_model";
+import * as InitialModel from "./framework/initial_model";
 import { onPopState } from "./actions";
 
 const store = new Store("Todos", InitialModel.get(), window.history);

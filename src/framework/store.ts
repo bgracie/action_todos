@@ -1,7 +1,7 @@
-import * as Logger from "./interface/logging";
-import { Model } from "./model/model";
-import * as NoncanonicalModelProperties from "./model/noncanonical_model_properties";
-import { safeMerge } from "./util/object";
+import * as Logger from "../interface/logging";
+import { Model } from "../model/model";
+import * as NoncanonicalModelProperties from "./noncanonical_model_properties";
+import { safeMerge } from "../util/object";
 
 export type BoundAction = (...args: any[]) => any;
 export type UnboundAction = (store: Store, ...rest: any[]) => any;

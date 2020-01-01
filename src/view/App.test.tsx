@@ -1,7 +1,7 @@
 import * as React from "react";
 import { App } from "./App";
-import * as InitialModel from "../model/initial_model";
-import { Store } from "../store";
+import * as InitialModel from "../framework/initial_model";
+import { Store } from "../framework/store";
 import "../test/setup_tests";
 import { render } from "@testing-library/react";
 

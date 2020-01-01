@@ -11,16 +11,17 @@ This app is meant to explore an alternative to state management with Redux which
 - just uses Actions instead of Actions and Reducers
 - handles side effects directly within Actions rather than in Middleware
 
-You can see the state management framework [here](src/store.ts).
+You can see the state management framework [here](src/framework/store.ts).
 
 - To trigger a state change, call a `BoundAction`.
 - Each action must call `store.replaceModel()`.
 
 ## Files & Directory Structure
 
-- `model` contains non-mutative functions and types related to the model
+- `model` contains the model definition and pure functions that operate on the model
 - `actions` contains functions that mutate the model
 - `interface` contains functions wrapping browser API's
+- `framework` contains functions related to the state management framework
 
 ## Available Scripts
 

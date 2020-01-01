@@ -1,4 +1,4 @@
-import { DefaultProps } from "../store";
+import { DefaultProps } from "../framework/store";
 import * as React from "react";
 import { Main } from "./Main";
 import { Footer } from "./Footer";

@@ -1,4 +1,4 @@
-import { Store } from "./store";
+import { Store } from "./framework/store";
 import { TodoId } from "./model/model";
 import { safeMerge } from "./util/object";
 import { findTodoIndex, findTodo, newTodo } from "./model/todos";

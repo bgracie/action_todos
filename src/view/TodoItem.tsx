@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Model, Todo } from "../model/model";
-import { BindAction } from "../store";
+import { BindAction } from "../framework/store";
 import classNames from "classnames";
 import * as Actions from "../actions";
 

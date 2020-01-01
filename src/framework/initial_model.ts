@@ -1,5 +1,5 @@
 import * as LocalStorage from "../interface/localstorage";
-import * as Model from "./model";
+import * as Model from "../model/model";
 import * as NoncanonicalModelProperties from "./noncanonical_model_properties";
 
 export const get = (): Model.Model => {
