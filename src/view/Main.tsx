@@ -2,7 +2,7 @@ import * as React from "react";
 import { DefaultProps } from "../framework/store";
 import { activeTodoCount, shownTodos } from "../model/todos";
 import { TodoItem } from "./TodoItem";
-import { completeAll } from "../actions";
+import { onCompleteAllClick } from "../actions/todos";
 
 export class Main extends React.Component<DefaultProps> {
   public render() {
@@ -14,7 +14,7 @@ export class Main extends React.Component<DefaultProps> {
           id="toggle-all"
           className="toggle-all"
           type="checkbox"
-          onChange={bindAction(completeAll)}
+          onChange={bindAction(onCompleteAllClick)}
           checked={activeTodoCount(model) === 0}
         />
         <label htmlFor="toggle-all" />

@@ -6,13 +6,13 @@ import { Store } from "./framework/store";
 import * as LocalStorage from "./interface/localstorage";
 import "./view/index.css";
 import * as InitialModel from "./framework/initial_model";
-import { onPopState } from "./actions";
+import { onHistoryPopState } from "./actions/history";
 
 const store = new Store("Todos", InitialModel.get(), window.history);
 
 store.subscribe(LocalStorage.setStoredState);
 
-window.onpopstate = store.bindAction(onPopState);
+window.onpopstate = store.bindAction(onHistoryPopState);
 
 ReactDOM.render(
   <AppContainer store={store} />,

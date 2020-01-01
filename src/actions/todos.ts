@@ -1,28 +1,11 @@
-import { Store } from "./framework/store";
-import { TodoId } from "./model/model";
-import { safeMerge } from "./util/object";
-import { findTodoIndex, findTodo, newTodo } from "./model/todos";
-import * as Keyboard from "./interface/keyboard";
-import { Todo } from "./model/model";
+import { Store } from "../framework/store";
+import { TodoId } from "../model/model";
+import { safeMerge } from "../util/object";
+import { findTodoIndex, findTodo, newTodo } from "../model/todos";
+import * as Keyboard from "../interface/keyboard";
+import { Todo } from "../model/model";
 
-export function submitTodo(store: Store) {
-  const _model = store.model();
-  const todos = _model.todos.slice(0);
-  const editingIndex = findTodoIndex(_model, _model.editingTodoId as TodoId);
-  todos[editingIndex] = safeMerge(todos[editingIndex], {
-    label: _model.editingTodoLabel
-  });
-
-  store.replaceModel(
-    safeMerge(_model, {
-      todos: todos,
-      editingTodoId: null,
-      editingTodoLabel: ""
-    })
-  );
-}
-
-export function completeOne(store: Store, todoId: TodoId) {
+export function onTodoCheckboxClick(store: Store, todoId: TodoId) {
   const _model = store.model();
   const _todos = _model.todos.slice(0);
   const _index = findTodoIndex(_model, todoId);
@@ -32,7 +15,7 @@ export function completeOne(store: Store, todoId: TodoId) {
   store.replaceModel(safeMerge(_model, { todos: _todos }));
 }
 
-export function editTodo(store: Store, todoId: TodoId) {
+export function onTodoDoubleClick(store: Store, todoId: TodoId) {
   const _model = store.model();
   const todo = findTodo(_model, todoId);
 
@@ -41,7 +24,7 @@ export function editTodo(store: Store, todoId: TodoId) {
   );
 }
 
-export function destroyTodo(store: Store, todoId: TodoId) {
+export function onTodoXClick(store: Store, todoId: TodoId) {
   const _model = store.model();
   const todos = _model.todos.filter(_todo => {
     return _todo.id !== todoId;
@@ -76,7 +59,7 @@ export function onTodoKeyDown(store: Store, event: React.KeyboardEvent) {
   }
 }
 
-export function onNewTodoKeyDown(store: Store, event: React.KeyboardEvent) {
+export function onTodoInputKeyDown(store: Store, event: React.KeyboardEvent) {
   if (event.keyCode !== Keyboard.KeyCodeEnter) {
     return;
   }
@@ -96,7 +79,7 @@ export function onNewTodoKeyDown(store: Store, event: React.KeyboardEvent) {
   }
 }
 
-export function onNewTodoChange(store: Store, event: React.KeyboardEvent) {
+export function onTodoInputChange(store: Store, event: React.KeyboardEvent) {
   store.replaceModel(
     safeMerge(store.model(), {
       newTodoLabel: (event.target as HTMLInputElement).value
@@ -104,16 +87,12 @@ export function onNewTodoChange(store: Store, event: React.KeyboardEvent) {
   );
 }
 
-export function onPopState(_store: Store) {
-  _store.replaceModel();
-}
-
 export function onFilterClick(store: Store, newRoute: string) {
   store.changeRoute(newRoute);
   store.replaceModel();
 }
 
-export function onClearCompleted(store: Store) {
+export function onClearCompletedClick(store: Store) {
   const _model = store.model();
   const _todos = _model.todos.filter(_todo => {
     return !_todo.completed;
@@ -122,7 +101,7 @@ export function onClearCompleted(store: Store) {
   store.replaceModel(safeMerge(_model, { todos: _todos }));
 }
 
-export function completeAll(store: Store) {
+export function onCompleteAllClick(store: Store) {
   const _model = store.model();
 
   store.replaceModel(
@@ -130,6 +109,23 @@ export function completeAll(store: Store) {
       todos: _model.todos.map((_todo: Todo) =>
         safeMerge(_todo, { completed: true })
       )
+    })
+  );
+}
+
+function submitTodo(store: Store) {
+  const _model = store.model();
+  const todos = _model.todos.slice(0);
+  const editingIndex = findTodoIndex(_model, _model.editingTodoId as TodoId);
+  todos[editingIndex] = safeMerge(todos[editingIndex], {
+    label: _model.editingTodoLabel
+  });
+
+  store.replaceModel(
+    safeMerge(_model, {
+      todos: todos,
+      editingTodoId: null,
+      editingTodoLabel: ""
     })
   );
 }

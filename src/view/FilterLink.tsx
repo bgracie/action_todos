@@ -2,7 +2,7 @@ import * as React from "react";
 import { Model } from "../model/model";
 import { BindAction } from "../framework/store";
 import classNames from "classnames";
-import { onFilterClick } from "../actions";
+import { onFilterClick } from "../actions/todos";
 
 interface FilterLinkProps {
   model: Model;

@@ -2,7 +2,7 @@ import * as React from "react";
 import { Model, Todo } from "../model/model";
 import { BindAction } from "../framework/store";
 import classNames from "classnames";
-import * as Actions from "../actions";
+import * as Actions from "../actions/todos";
 
 interface TodoItemProps {
   model: Model;
@@ -37,14 +37,14 @@ export class TodoItem extends React.Component<TodoItemProps> {
             className="toggle"
             type="checkbox"
             checked={todo.completed}
-            onChange={bindAction(Actions.completeOne, todo.id)}
+            onChange={bindAction(Actions.onTodoCheckboxClick, todo.id)}
           />
-          <label onDoubleClick={bindAction(Actions.editTodo, todo.id)}>
+          <label onDoubleClick={bindAction(Actions.onTodoDoubleClick, todo.id)}>
             {todo.label}
           </label>
           <button
             className="destroy"
-            onClick={bindAction(Actions.destroyTodo, todo.id)}
+            onClick={bindAction(Actions.onTodoXClick, todo.id)}
           />
         </div>
         <input
