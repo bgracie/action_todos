@@ -3,7 +3,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { AppContainer } from "./view/AppContainer";
 import { Store } from "./store";
-import * as LibLocalStorage from "./interface/localstorage";
+import * as LocalStorage from "./interface/localstorage";
 import "./view/index.css";
 import { getCached } from "./model/cached_model";
 import { initialModel } from "./model/initial_model";
@@ -11,12 +11,7 @@ import { onPopState } from "./actions";
 
 const store = new Store("Todos", initialModel(), window.history, getCached);
 
-store.subscribe(model => {
-  window.localStorage.setItem(
-    LibLocalStorage.StoredStateKey,
-    JSON.stringify({ todos: model.todos })
-  );
-});
+store.subscribe(LocalStorage.setStoredState);
 
 window.onpopstate = store.bindAction(onPopState);
 
