@@ -1,4 +1,4 @@
-import { storedTodos } from "./localstorage";
+import * as LocalStorage from "../interface/localstorage";
 import { getCached } from "./cached_model";
 
 export const initialModel = () => {
@@ -6,7 +6,7 @@ export const initialModel = () => {
     editingTodoId: null,
     newTodoLabel: "",
     editingTodoLabel: "",
-    todos: storedTodos(),
+    todos: LocalStorage.getStoredState().todos,
     cached: getCached()
   };
 };

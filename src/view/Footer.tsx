@@ -1,6 +1,6 @@
 import * as React from "react";
-import { DefaultProps } from "../framework/store";
-import { activeTodoCount } from "../lib/todos";
+import { DefaultProps } from "../store";
+import { activeTodoCount } from "../model/todos";
 import * as Utilities from "../utilities";
 import { FilterLink } from "./FilterLink";
 import { ClearButton } from "./ClearButton";

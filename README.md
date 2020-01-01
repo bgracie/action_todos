@@ -18,8 +18,9 @@ You can see the state management framework [here](src/store.ts).
 
 ## Files & Directory Structure
 
-- `lib` contains the app model definition and non-mutative business logic
-- `actions` contains the functions that mutate the model
+- `model` contains non-mutative functions and types related to the model
+- `actions` contains functions that mutate the model
+- `interface` contains functions wrapping browser API's
 
 ## Available Scripts
 
@@ -60,4 +61,4 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## App Shell
 
-The app was bootstrapped with `create-react-app`, and is managed by the `react-scripts` package. Further documentation for `create-react_app` is available [here](https://facebook.github.io/create-react-app/docs/getting-started).
+The app was bootstrapped with `create-react-app`, and is managed by the `react-scripts` package. Further documentation for `create-react-app` is available [here](https://facebook.github.io/create-react-app/docs/getting-started).

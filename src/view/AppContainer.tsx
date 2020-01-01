@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Store } from "../framework/store";
+import { Store } from "../store";
 import { App } from "./App";
 
 interface AppContainerProps {

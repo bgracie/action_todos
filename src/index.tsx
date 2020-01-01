@@ -1,12 +1,12 @@
-import * as serviceWorker from "./framework/service_worker";
+import * as serviceWorker from "./interface/service_worker";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { AppContainer } from "./view/AppContainer";
-import { Store } from "./framework/store";
-import * as LibLocalStorage from "./lib/localstorage";
+import { Store } from "./store";
+import * as LibLocalStorage from "./interface/localstorage";
 import "./view/index.css";
-import { getCached } from "./lib/cached_model";
-import { initialModel } from "./lib/initial_model";
+import { getCached } from "./model/cached_model";
+import { initialModel } from "./model/initial_model";
 import { onPopState } from "./actions";
 
 const store = new Store("Todos", initialModel(), window.history, getCached);

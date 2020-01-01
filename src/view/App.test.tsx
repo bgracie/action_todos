@@ -1,9 +1,9 @@
 import * as React from "react";
 import { App } from "./App";
-import { getCached } from "../lib/cached_model";
-import { initialModel } from "../lib/initial_model";
-import { Store } from "../framework/store";
-import "../framework/setup_tests";
+import { getCached } from "../model/cached_model";
+import { initialModel } from "../model/initial_model";
+import { Store } from "../store";
+import "../test/setup_tests";
 import { render } from "@testing-library/react";
 
 test("renders learn react link", () => {

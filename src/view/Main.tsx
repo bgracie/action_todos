@@ -1,6 +1,6 @@
 import * as React from "react";
-import { DefaultProps } from "../framework/store";
-import { activeTodoCount, shownTodos } from "../lib/todos";
+import { DefaultProps } from "../store";
+import { activeTodoCount, shownTodos } from "../model/todos";
 import { TodoItem } from "./TodoItem";
 import { completeAll } from "../actions";
 
