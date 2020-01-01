@@ -1,9 +1,8 @@
 import { Store } from "./store";
 import { TodoId } from "./model/model";
-import { safeMerge } from "./utilities";
+import { safeMerge } from "./util/object";
 import { findTodoIndex, findTodo, newTodo } from "./model/todos";
 import * as Keyboard from "./interface/keyboard";
-import * as Utilities from "./utilities";
 import { Todo } from "./model/model";
 
 export function submitTodo(store: Store) {
@@ -120,7 +119,7 @@ export function onClearCompleted(store: Store) {
     return !_todo.completed;
   });
 
-  store.replaceModel(Utilities.safeMerge(_model, { todos: _todos }));
+  store.replaceModel(safeMerge(_model, { todos: _todos }));
 }
 
 export function completeAll(store: Store) {

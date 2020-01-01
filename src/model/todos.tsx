@@ -1,5 +1,5 @@
 import { Model, TodoId, Todo, TodoLabel, TodoIndex } from "./model";
-import { uuid } from "../utilities";
+import * as Uuid from "../util/uuid";
 import * as Paths from "./url_paths";
 
 export const findTodo = (model: Model, todoId: TodoId): Todo => {
@@ -38,7 +38,7 @@ export const shownTodos = (model: Model): Todo[] => {
 
 export const newTodo = (label: TodoLabel) => {
   return {
-    id: uuid(),
+    id: Uuid.generate(),
     label: label,
     completed: false
   };

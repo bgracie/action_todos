@@ -1,8 +1,4 @@
-export function safeMerge<T>(updating: T, updateWith: object): T {
-  return Object.assign({}, updating, updateWith);
-}
-
-export function uuid() {
+export function generate() {
   /*jshint bitwise:false */
   let i;
   let random;
@@ -17,8 +13,4 @@ export function uuid() {
   }
 
   return _uuid;
-}
-
-export function pluralize(count: number, word: string) {
-  return count === 1 ? word : word + "s";
 }

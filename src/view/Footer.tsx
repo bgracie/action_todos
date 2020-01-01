@@ -1,7 +1,7 @@
 import * as React from "react";
 import { DefaultProps } from "../store";
 import { activeTodoCount } from "../model/todos";
-import * as Utilities from "../utilities";
+import { pluralize } from "../util/string";
 import { FilterLink } from "./FilterLink";
 import { ClearButton } from "./ClearButton";
 
@@ -10,7 +10,7 @@ export class Footer extends React.Component<DefaultProps> {
     const { model, bindAction } = this.props;
 
     const _activeCount = activeTodoCount(model);
-    const activeTodoWord = Utilities.pluralize(_activeCount, "item");
+    const activeTodoWord = pluralize("item", _activeCount);
 
     if (model.todos.length > 0) {
       return (
