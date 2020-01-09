@@ -6,7 +6,7 @@ import "../test/setup_tests";
 import { render } from "@testing-library/react";
 
 test("renders learn react link", () => {
-  const store = new Store("Todos", InitialModel.get(), window.history);
+  const store = new Store("Todos", InitialModel.get(), window.history, []);
   const { getByText } = render(
     <App model={InitialModel.get()} bindAction={store.bindAction} />
   );

@@ -9,10 +9,14 @@ import * as InitialModel from "./framework/initial_model";
 import { onHistoryPopState } from "./actions/history";
 import { Model } from "./model/model";
 
-const store = new Store("Todos", InitialModel.get(), window.history);
-
-store.subscribe((prevModel: Model, model: Model) =>
-  LocalStorage.setStoredState(model)
+const updateLocalstorage = (prevModel: Model, model: Model) =>
+  LocalStorage.setStoredState(model);
+const storeSubscriptions = [updateLocalstorage];
+const store = new Store(
+  "Todos",
+  InitialModel.get(),
+  window.history,
+  storeSubscriptions
 );
 
 window.onpopstate = store.bindAction(onHistoryPopState);

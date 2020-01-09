@@ -24,12 +24,13 @@ export class Store {
   constructor(
     name: string,
     initialModel: Model,
-    history: typeof window.history
+    history: typeof window.history,
+    subscriptions: Subscription[]
   ) {
     this._history = history;
     this._model = initialModel;
     this._name = name;
-    this._subscriptions = [];
+    this._subscriptions = subscriptions;
     this._modelVersion = 0;
     this._getNoncanonicalModelProperties = NoncanonicalModelProperties.get;
 
