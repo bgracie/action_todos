@@ -1,4 +1,4 @@
-import { Store } from "../framework/store";
+import { Store } from "../store";
 import { TodoId, Model } from "../model";
 import * as Keyboard from "../interface/keyboard";
 import * as Reducers from "../reducers/todos";

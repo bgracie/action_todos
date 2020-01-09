@@ -1,5 +1,5 @@
 import * as React from "react";
-import { DefaultProps } from "../framework/store";
+import { DefaultProps } from "../store";
 import { activeTodoCount } from "../selectors/todos";
 import { pluralize } from "../util/string";
 import { FilterLink } from "./FilterLink";

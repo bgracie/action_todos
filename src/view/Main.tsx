@@ -1,5 +1,5 @@
 import * as React from "react";
-import { DefaultProps } from "../framework/store";
+import { DefaultProps } from "../store";
 import { activeTodoCount, shownTodos } from "../selectors/todos";
 import { TodoItem } from "./TodoItem";
 import { onCompleteAllClick } from "../actions/todos";

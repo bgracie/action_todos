@@ -1,5 +1,5 @@
 import * as React from "react";
-import { DefaultProps } from "../framework/store";
+import { DefaultProps } from "../store";
 import { onNewTodoInputKeyDown, onNewTodoInputChange } from "../actions/todos";
 
 export class NewTodoInput extends React.Component<DefaultProps> {

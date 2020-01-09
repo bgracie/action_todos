@@ -1,4 +1,4 @@
-import { Store } from "../framework/store";
+import { Store } from "../store";
 import { changePathname } from "../reducers/history";
 import { Model } from "../model";
 import * as Logging from "../interface/logging";

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { DefaultProps } from "../framework/store";
+import { DefaultProps } from "../store";
 import { completedTodoCount } from "../selectors/todos";
 import { onClearCompletedClick } from "../actions/todos";
 
