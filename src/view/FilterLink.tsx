@@ -18,7 +18,7 @@ export class FilterLink extends React.Component<FilterLinkProps> {
     return (
       <li>
         <a
-          href="javascript:void(0)"
+          href={path}
           className={classNames({
             selected: model.pathname === path
           })}

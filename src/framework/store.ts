@@ -31,7 +31,6 @@ export class Store {
     this._name = name;
     this._subscriptions = [];
     this._modelVersion = 0;
-    this.bindAction = this.bindAction.bind(this);
     this._getNoncanonicalModelProperties = NoncanonicalModelProperties.get;
 
     Logger.log(
@@ -67,10 +66,10 @@ export class Store {
     Logger.log(this.model());
     this.notifySubscribers(currentModel);
   }
-  public bindAction(
+  public bindAction = (
     unboundAction: UnboundAction,
     ...actionDetails: any[]
-  ): BoundAction {
+  ): BoundAction => {
     return (...args: any[]) => {
       Logger.log(
         `%cActing with ${unboundAction.name}, ${actionDetails}`,
@@ -79,7 +78,7 @@ export class Store {
 
       unboundAction(this, ...actionDetails, ...args);
     };
-  }
+  };
   public subscribe(subscription: Subscription) {
     this._subscriptions.push(subscription);
   }
