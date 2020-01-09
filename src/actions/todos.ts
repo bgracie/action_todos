@@ -89,8 +89,7 @@ export function onTodoInputChange(store: Store, event: React.KeyboardEvent) {
 
 export function onFilterClick(store: Store, newRoute: string, e: Event) {
   e.preventDefault();
-  store.changeRoute(newRoute);
-  store.replaceModel();
+  store.replaceModel(safeMerge(store.model(), { pathname: newRoute }));
 }
 
 export function onClearCompletedClick(store: Store) {

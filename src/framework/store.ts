@@ -1,7 +1,5 @@
-import * as Logger from "../interface/logging";
+import * as Logging from "../interface/logging";
 import { Model } from "../model/model";
-import * as NoncanonicalModelProperties from "./noncanonical_model_properties";
-import { safeMerge } from "../util/object";
 
 export type BoundAction = (...args: any[]) => any;
 export type UnboundAction = (store: Store, ...rest: any[]) => any;
@@ -17,62 +15,44 @@ export interface DefaultProps {
 export class Store {
   private _model: Model;
   private _name: string;
-  private _history: typeof window.history;
   private _subscriptions: Subscription[];
   private _modelVersion: number;
-  private _getNoncanonicalModelProperties: typeof NoncanonicalModelProperties.get;
   constructor(
     name: string,
     initialModel: Model,
-    history: typeof window.history,
     subscriptions: Subscription[]
   ) {
-    this._history = history;
     this._model = initialModel;
     this._name = name;
     this._subscriptions = subscriptions;
     this._modelVersion = 0;
-    this._getNoncanonicalModelProperties = NoncanonicalModelProperties.get;
 
-    Logger.log(
+    Logging.log(
       `%cCreating store ${name} with model version ${this._modelVersion}:`,
       "font-weight: bold"
     );
-    Logger.log(this.model());
+    Logging.log(this.model());
   }
   public model(): Model {
     return this._model;
   }
-  public changeRoute(newRoute: string) {
-    this._history.pushState({}, "", newRoute);
-  }
-  public replaceModel(newModel?: Model) {
-    const currentModel = this.model();
-    if (newModel) {
-      this._model = Object.assign(
-        newModel,
-        this._getNoncanonicalModelProperties()
-      );
-    } else {
-      this._model = safeMerge(
-        this.model(),
-        this._getNoncanonicalModelProperties()
-      );
-    }
+  public replaceModel(newModel: Model) {
+    const prevModel = this.model();
+    this._model = newModel;
     this._modelVersion++;
-    Logger.log(
+    Logging.log(
       `%cModel version ${this._modelVersion} for ${this._name} store:`,
       "color: green"
     );
-    Logger.log(this.model());
-    this.notifySubscribers(currentModel);
+    Logging.log(newModel);
+    this.notifySubscribers(prevModel, newModel);
   }
   public bindAction = (
     unboundAction: UnboundAction,
     ...actionDetails: any[]
   ): BoundAction => {
     return (...args: any[]) => {
-      Logger.log(
+      Logging.log(
         `%cActing with ${unboundAction.name}, ${actionDetails}`,
         "font-weight: bold"
       );
@@ -83,9 +63,9 @@ export class Store {
   public subscribe(subscription: Subscription) {
     this._subscriptions.push(subscription);
   }
-  private notifySubscribers(prevModel: Model) {
-    this._subscriptions.forEach(sub => {
-      sub(prevModel, this.model());
+  private notifySubscribers(prevModel: Model, newModel: Model) {
+    this._subscriptions.forEach(subscription => {
+      subscription(prevModel, newModel);
     });
   }
 }

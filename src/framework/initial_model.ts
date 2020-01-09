@@ -1,17 +1,12 @@
 import * as LocalStorage from "../interface/localstorage";
 import * as Model from "../model/model";
-import * as NoncanonicalModelProperties from "./noncanonical_model_properties";
 
 export const get = (): Model.Model => {
-  const canonicalModelProperties = {
+  return {
     editingTodoId: null,
     newTodoLabel: "",
     editingTodoLabel: "",
-    todos: LocalStorage.getStoredState().todos
+    todos: LocalStorage.getStoredState().todos,
+    pathname: window.location.pathname
   };
-
-  return Object.assign(
-    canonicalModelProperties,
-    NoncanonicalModelProperties.get()
-  );
 };

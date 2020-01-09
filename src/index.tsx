@@ -8,16 +8,22 @@ import "./view/index.css";
 import * as InitialModel from "./framework/initial_model";
 import { onHistoryPopState } from "./actions/history";
 import { Model } from "./model/model";
+import * as Logging from "./interface/logging";
 
-const updateLocalstorage = (prevModel: Model, model: Model) =>
+const isModelTriggeringRouteChange = (prevModel: Model, model: Model) =>
+  prevModel.pathname !== model.pathname &&
+  model.pathname !== window.location.pathname;
+
+const updateUrl = (prevModel: Model, model: Model) => {
+  if (isModelTriggeringRouteChange(prevModel, model)) {
+    window.history.pushState({}, "", model.pathname);
+    Logging.log(`Model update triggered route change to '${model.pathname}'`);
+  }
+};
+const updateLocalStorage = (prevModel: Model, model: Model) =>
   LocalStorage.setStoredState(model);
-const storeSubscriptions = [updateLocalstorage];
-const store = new Store(
-  "Todos",
-  InitialModel.get(),
-  window.history,
-  storeSubscriptions
-);
+const storeSubscriptions = [updateUrl, updateLocalStorage];
+const store = new Store("Todos", InitialModel.get(), storeSubscriptions);
 
 window.onpopstate = store.bindAction(onHistoryPopState);
 
