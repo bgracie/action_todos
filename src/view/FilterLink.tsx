@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Model } from "../model/model";
+import { Model } from "../model";
 import { BindAction } from "../framework/store";
 import classNames from "classnames";
 import { onFilterClick } from "../actions/todos";

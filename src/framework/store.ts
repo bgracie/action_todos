@@ -1,5 +1,5 @@
 import * as Logging from "../interface/logging";
-import { Model } from "../model/model";
+import { Model } from "../model";
 
 export type BoundAction = (...args: any[]) => any;
 export type UnboundAction = (store: Store, model: Model, ...rest: any[]) => any;

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { DefaultProps } from "../framework/store";
-import { activeTodoCount } from "../model/todos";
+import { activeTodoCount } from "../selectors/todos";
 import { pluralize } from "../util/string";
 import { FilterLink } from "./FilterLink";
 import { ClearButton } from "./ClearButton";

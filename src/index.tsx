@@ -7,7 +7,7 @@ import * as LocalStorage from "./interface/localstorage";
 import "./view/index.css";
 import * as InitialModel from "./framework/initial_model";
 import { onHistoryPopState } from "./actions/history";
-import { Model } from "./model/model";
+import { Model } from "./model";
 import * as Logging from "./interface/logging";
 
 const isModelTriggeringRouteChange = (prevModel: Model, model: Model) =>

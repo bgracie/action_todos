@@ -1,6 +1,6 @@
 import * as React from "react";
 import { DefaultProps } from "../framework/store";
-import { completedTodoCount } from "../model/todos";
+import { completedTodoCount } from "../selectors/todos";
 import { onClearCompletedClick } from "../actions/todos";
 
 export class ClearButton extends React.Component<DefaultProps> {

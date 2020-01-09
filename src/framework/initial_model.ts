@@ -1,5 +1,5 @@
 import * as LocalStorage from "../interface/localstorage";
-import * as Model from "../model/model";
+import * as Model from "../model";
 
 export const get = (): Model.Model => {
   return {

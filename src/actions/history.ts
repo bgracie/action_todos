@@ -1,6 +1,6 @@
 import { Store } from "../framework/store";
 import { changePathname } from "../reducers/history";
-import { Model } from "../model/model";
+import { Model } from "../model";
 import * as Logging from "../interface/logging";
 
 export function onHistoryPopState(store: Store, model: Model) {

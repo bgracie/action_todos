@@ -1,7 +1,7 @@
-import { TodoId, Model } from "../model/model";
+import { TodoId, Model } from "../model";
 import { safeMerge } from "../util/object";
-import { findTodoIndex, findTodo, newTodo } from "../model/todos";
-import { Todo } from "../model/model";
+import { findTodoIndex, findTodo, newTodo } from "../selectors/todos";
+import { Todo } from "../model";
 
 export const toggleTodoCompleted = (model: Model, todoId: TodoId) => {
   const todos = model.todos.slice(0);

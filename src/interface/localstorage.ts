@@ -1,4 +1,4 @@
-import * as Model from "../model/model";
+import * as Model from "../model";
 
 export interface StoredState {
   todos: Model.Todo[];
