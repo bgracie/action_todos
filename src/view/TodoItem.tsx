@@ -54,8 +54,8 @@ export class TodoItem extends React.Component<TodoItemProps> {
           }}
           value={model.editingTodoLabel}
           onBlur={bindAction(Actions.onTodoBlur)}
-          onChange={bindAction(Actions.onTodoChange)}
-          onKeyDown={bindAction(Actions.onTodoKeyDown)}
+          onChange={bindAction(Actions.onEditingTodoChange)}
+          onKeyDown={bindAction(Actions.onEditingTodoKeyDown)}
         />
       </li>
     );

@@ -1,8 +1,8 @@
 import * as React from "react";
 import { DefaultProps } from "../framework/store";
-import { onTodoInputKeyDown, onTodoInputChange } from "../actions/todos";
+import { onNewTodoInputKeyDown, onNewTodoInputChange } from "../actions/todos";
 
-export class TodoTextInput extends React.Component<DefaultProps> {
+export class NewTodoInput extends React.Component<DefaultProps> {
   public render() {
     const { model, bindAction } = this.props;
 
@@ -11,8 +11,8 @@ export class TodoTextInput extends React.Component<DefaultProps> {
         className="new-todo"
         placeholder="What needs to be done?"
         value={model.newTodoLabel}
-        onKeyDown={bindAction(onTodoInputKeyDown)}
-        onChange={bindAction(onTodoInputChange)}
+        onKeyDown={bindAction(onNewTodoInputKeyDown)}
+        onChange={bindAction(onNewTodoInputChange)}
         autoFocus={true}
       />
     );

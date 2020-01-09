@@ -53,7 +53,7 @@ export class Store {
   ): BoundAction => {
     return (...dynamicArgs: any[]) => {
       Logging.log(
-        `%cActing with ${unboundAction.name}, ${bindArgs} ${dynamicArgs}`,
+        `%cActing with ${unboundAction.name}, ${bindArgs}`,
         "font-weight: bold"
       );
 

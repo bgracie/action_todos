@@ -1,102 +1,68 @@
 import { Store } from "../framework/store";
 import { TodoId, Model } from "../model/model";
-import { safeMerge } from "../util/object";
-import { findTodoIndex, findTodo, newTodo } from "../model/todos";
 import * as Keyboard from "../interface/keyboard";
-import { Todo } from "../model/model";
+import * as Reducers from "../reducers/todos";
 
 export function onTodoCheckboxClick(
   store: Store,
   model: Model,
   todoId: TodoId
 ) {
-  const _todos = model.todos.slice(0);
-  const _index = findTodoIndex(model, todoId);
-
-  _todos[_index] = safeMerge(_todos[_index], { completed: true });
-
-  store.replaceModel(safeMerge(model, { todos: _todos }));
+  store.replaceModel(Reducers.toggleTodoCompleted(model, todoId));
 }
 
 export function onTodoDoubleClick(store: Store, model: Model, todoId: TodoId) {
-  const todo = findTodo(model, todoId);
-
-  store.replaceModel(
-    safeMerge(model, { editingTodoId: todoId, editingTodoLabel: todo.label })
-  );
+  store.replaceModel(Reducers.editTodo(model, todoId));
 }
 
 export function onTodoXClick(store: Store, model: Model, todoId: TodoId) {
-  const todos = model.todos.filter(_todo => {
-    return _todo.id !== todoId;
-  });
-
-  store.replaceModel(safeMerge(model, { todos: todos }));
+  store.replaceModel(Reducers.deleteTodo(model, todoId));
 }
 
 export function onTodoBlur(store: Store, model: Model) {
-  submitTodo(store, model);
+  store.replaceModel(Reducers.updateTodo(model));
 }
 
-export function onTodoChange(
+export function onEditingTodoChange(
   store: Store,
   model: Model,
   event: React.KeyboardEvent
 ) {
-  store.replaceModel(
-    safeMerge(model, {
-      editingTodoLabel: (event.target as HTMLInputElement).value
-    })
-  );
+  const newValue = (event.target as HTMLInputElement).value;
+  store.replaceModel(Reducers.updateEditField(model, newValue));
 }
 
-export function onTodoKeyDown(
+export function onEditingTodoKeyDown(
   store: Store,
   model: Model,
   event: React.KeyboardEvent
 ) {
   if (event.which === Keyboard.KeyCodeEnter) {
-    submitTodo(store, model);
+    store.replaceModel(Reducers.updateTodo(model));
   } else if (event.which === Keyboard.KeyCodeEscape) {
-    store.replaceModel(
-      safeMerge(model, { editingTodoLabel: "", editingTodoId: null })
-    );
+    store.replaceModel(Reducers.cancelTodoEdit(model));
   }
 }
 
-export function onTodoInputKeyDown(
+export function onNewTodoInputKeyDown(
   store: Store,
   model: Model,
   event: React.KeyboardEvent
 ) {
-  if (event.keyCode !== Keyboard.KeyCodeEnter) {
-    return;
-  }
+  if (event.keyCode === Keyboard.KeyCodeEnter) {
+    event.preventDefault();
 
-  event.preventDefault();
-
-  const val = (event.target as HTMLInputElement).value;
-
-  if (val) {
-    store.replaceModel(
-      safeMerge(model, {
-        todos: model.todos.concat(newTodo(val)),
-        newTodoLabel: ""
-      })
-    );
+    store.replaceModel(Reducers.createTodo(model));
   }
 }
 
-export function onTodoInputChange(
+export function onNewTodoInputChange(
   store: Store,
   model: Model,
   event: React.KeyboardEvent
 ) {
-  store.replaceModel(
-    safeMerge(model, {
-      newTodoLabel: (event.target as HTMLInputElement).value
-    })
-  );
+  const newValue = (event.target as HTMLInputElement).value;
+  store.replaceModel(Reducers.changeTodoInput(model, newValue));
 }
 
 export function onFilterClick(
@@ -106,39 +72,13 @@ export function onFilterClick(
   e: Event
 ) {
   e.preventDefault();
-  store.replaceModel(safeMerge(store.model(), { pathname: newRoute }));
+  store.replaceModel(Reducers.changeRoute(model, newRoute));
 }
 
 export function onClearCompletedClick(store: Store, model: Model) {
-  const _todos = model.todos.filter(_todo => {
-    return !_todo.completed;
-  });
-
-  store.replaceModel(safeMerge(model, { todos: _todos }));
+  store.replaceModel(Reducers.clearCompletedTodos(model));
 }
 
 export function onCompleteAllClick(store: Store, model: Model) {
-  store.replaceModel(
-    safeMerge(model, {
-      todos: model.todos.map((_todo: Todo) =>
-        safeMerge(_todo, { completed: true })
-      )
-    })
-  );
-}
-
-function submitTodo(store: Store, model: Model) {
-  const todos = model.todos.slice(0);
-  const editingIndex = findTodoIndex(model, model.editingTodoId as TodoId);
-  todos[editingIndex] = safeMerge(todos[editingIndex], {
-    label: model.editingTodoLabel
-  });
-
-  store.replaceModel(
-    safeMerge(model, {
-      todos: todos,
-      editingTodoId: null,
-      editingTodoLabel: ""
-    })
-  );
+  store.replaceModel(Reducers.completeAllTodos(model));
 }

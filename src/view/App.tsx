@@ -2,7 +2,7 @@ import { DefaultProps } from "../framework/store";
 import * as React from "react";
 import { Main } from "./Main";
 import { Footer } from "./Footer";
-import { TodoTextInput } from "./TodoTextInput";
+import { NewTodoInput } from "./NewTodoInput";
 
 export class App extends React.Component<DefaultProps> {
   public render() {
@@ -13,7 +13,7 @@ export class App extends React.Component<DefaultProps> {
       <div>
         <header className="header">
           <h1>todos</h1>
-          <TodoTextInput model={model} bindAction={bindAction} />
+          <NewTodoInput model={model} bindAction={bindAction} />
           <Main model={model} bindAction={bindAction} />
           <Footer model={model} bindAction={bindAction} />
         </header>

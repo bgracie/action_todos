@@ -1,12 +1,10 @@
 import { Store } from "../framework/store";
-import { safeMerge } from "../util/object";
+import { changePathname } from "../reducers/history";
+import { Model } from "../model/model";
 import * as Logging from "../interface/logging";
 
-export function onHistoryPopState(_store: Store) {
-  Logging.log(
-    `Route change to '${window.location.pathname}' triggering model update`
-  );
-  _store.replaceModel(
-    safeMerge(_store.model(), { pathname: window.location.pathname })
-  );
+export function onHistoryPopState(store: Store, model: Model) {
+  const newPathname = window.location.pathname;
+  Logging.log(`Route change to '${newPathname}' triggering model update`);
+  store.replaceModel(changePathname(model, newPathname));
 }
