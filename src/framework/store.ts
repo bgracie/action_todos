@@ -2,7 +2,7 @@ import * as Logging from "../interface/logging";
 import { Model } from "../model/model";
 
 export type BoundAction = (...args: any[]) => any;
-export type UnboundAction = (store: Store, ...rest: any[]) => any;
+export type UnboundAction = (store: Store, model: Model, ...rest: any[]) => any;
 export type Subscription = (prevModel: Model, model: Model) => any;
 
 export type BindAction = typeof Store.prototype.bindAction;
@@ -49,15 +49,15 @@ export class Store {
   }
   public bindAction = (
     unboundAction: UnboundAction,
-    ...actionDetails: any[]
+    ...bindArgs: any[]
   ): BoundAction => {
-    return (...args: any[]) => {
+    return (...dynamicArgs: any[]) => {
       Logging.log(
-        `%cActing with ${unboundAction.name}, ${actionDetails}`,
+        `%cActing with ${unboundAction.name}, ${bindArgs} ${dynamicArgs}`,
         "font-weight: bold"
       );
 
-      unboundAction(this, ...actionDetails, ...args);
+      unboundAction(this, this.model(), ...bindArgs, ...dynamicArgs);
     };
   };
   public subscribe(subscription: Subscription) {
