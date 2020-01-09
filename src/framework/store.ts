@@ -5,7 +5,7 @@ import { safeMerge } from "../util/object";
 
 export type BoundAction = (...args: any[]) => any;
 export type UnboundAction = (store: Store, ...rest: any[]) => any;
-export type Subscription = (model: Model) => any;
+export type Subscription = (prevModel: Model, model: Model) => any;
 
 export type BindAction = typeof Store.prototype.bindAction;
 
@@ -47,6 +47,7 @@ export class Store {
     this._history.pushState({}, "", newRoute);
   }
   public replaceModel(newModel?: Model) {
+    const currentModel = this.model();
     if (newModel) {
       this._model = Object.assign(
         newModel,
@@ -64,7 +65,7 @@ export class Store {
       "color: green"
     );
     Logger.log(this.model());
-    this.notifySubscribers();
+    this.notifySubscribers(currentModel);
   }
   public bindAction(
     unboundAction: UnboundAction,
@@ -82,9 +83,9 @@ export class Store {
   public subscribe(subscription: Subscription) {
     this._subscriptions.push(subscription);
   }
-  private notifySubscribers() {
+  private notifySubscribers(prevModel: Model) {
     this._subscriptions.forEach(sub => {
-      sub(this.model());
+      sub(prevModel, this.model());
     });
   }
 }

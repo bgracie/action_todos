@@ -7,10 +7,13 @@ import * as LocalStorage from "./interface/localstorage";
 import "./view/index.css";
 import * as InitialModel from "./framework/initial_model";
 import { onHistoryPopState } from "./actions/history";
+import { Model } from "./model/model";
 
 const store = new Store("Todos", InitialModel.get(), window.history);
 
-store.subscribe(LocalStorage.setStoredState);
+store.subscribe((prevModel: Model, model: Model) =>
+  LocalStorage.setStoredState(model)
+);
 
 window.onpopstate = store.bindAction(onHistoryPopState);
 
