@@ -1,4 +1,4 @@
-import * as Logging from "./interface/logging";
+import * as Logging from "./browser/logging";
 import { Model } from "./model";
 
 export type BoundAction = (...args: any[]) => any;

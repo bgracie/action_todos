@@ -1,6 +1,6 @@
 import { Model } from "../model";
-import * as Logging from "../interface/logging";
-import * as LocalStorage from "../interface/localstorage";
+import * as Logging from "../browser/logging";
+import * as LocalStorage from "../browser/localstorage";
 
 const isModelTriggeringRouteChange = (prevModel: Model, model: Model) =>
   prevModel.pathname !== model.pathname &&
