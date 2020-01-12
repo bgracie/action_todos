@@ -1,5 +1,4 @@
-import { Model, TodoId, Todo, TodoLabel, TodoIndex } from "../model";
-import * as Uuid from "../util/uuid";
+import { Model, TodoId, Todo, TodoIndex } from "../model";
 import * as Paths from "./url_paths";
 
 export const findTodo = (model: Model, todoId: TodoId): Todo => {
@@ -34,12 +33,4 @@ export const shownTodos = (model: Model): Todo[] => {
       throw new Error("Filter options should be exhaustive.");
     }
   });
-};
-
-export const newTodo = (label: TodoLabel) => {
-  return {
-    id: Uuid.generate(),
-    label: label,
-    completed: false
-  };
 };

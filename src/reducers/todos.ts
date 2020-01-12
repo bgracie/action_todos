@@ -1,7 +1,8 @@
-import { TodoId, Model } from "../model";
+import { TodoId, Model, TodoLabel } from "../model";
 import { safeMerge } from "../util/object";
-import { findTodoIndex, findTodo, newTodo } from "../selectors/todos";
+import { findTodoIndex, findTodo } from "../selectors/todos";
 import { Todo } from "../model";
+import * as Uuid from "../util/uuid";
 
 export const toggleTodoCompleted = (model: Model, todoId: TodoId) => {
   const todos = model.todos.slice(0);
@@ -40,10 +41,18 @@ export const createTodo = (model: Model) => {
     return model;
   } else {
     return safeMerge(model, {
-      todos: model.todos.concat(newTodo(model.newTodoLabel)),
+      todos: model.todos.concat(buildNewTodo(model.newTodoLabel)),
       newTodoLabel: ""
     });
   }
+};
+
+const buildNewTodo = (label: TodoLabel) => {
+  return {
+    id: Uuid.generate(),
+    label: label,
+    completed: false
+  };
 };
 
 export const changeTodoInput = (model: Model, newValue: string) => {
